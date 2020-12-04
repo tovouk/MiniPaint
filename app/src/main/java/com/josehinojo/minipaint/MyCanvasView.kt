@@ -58,16 +58,10 @@ class MyCanvasView(context: Context) : View(context){
         return true
     }
 
-    private fun touchStart() {
+    private fun touchStart() {}
 
-    }
+    private fun touchMove() {}
 
-    private fun touchMove() {
-
-    }
-
-    private fun touchUp() {
-        
-    }
+    private fun touchUp() {}
 
 }
