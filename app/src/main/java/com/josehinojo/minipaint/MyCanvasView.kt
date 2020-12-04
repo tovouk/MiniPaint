@@ -7,7 +7,9 @@ import android.graphics.Paint
 import android.graphics.Path
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewConfiguration
 import androidx.core.content.res.ResourcesCompat
+import kotlin.math.abs
 
 private const val STROKE_WIDTH = 12f // has to be float
 
@@ -51,9 +53,9 @@ class MyCanvasView(context: Context) : View(context){
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         motionTouchEventX = event?.x!!
-        motionTouchEventY = event?.y!!
+        motionTouchEventY = event.y
 
-        when(event?.action){
+        when(event.action){
             MotionEvent.ACTION_DOWN -> touchStart()
             MotionEvent.ACTION_MOVE -> touchMove()
             MotionEvent.ACTION_UP -> touchUp()
@@ -70,8 +72,8 @@ class MyCanvasView(context: Context) : View(context){
     }
 
     private fun touchMove() {
-        val dx = Math.abs(motionTouchEventX - currentX)
-        val dy = Math.abs(motionTouchEventY - currentY)
+        val dx = abs(motionTouchEventX - currentX)
+        val dy = abs(motionTouchEventY - currentY)
         if (dx >= touchTolerance || dy >= touchTolerance) {
             // QuadTo() adds a quadratic bezier from the last point,
             // approaching control point (x1,y1), and ending at (x2,y2).
